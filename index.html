@@ -1,49 +1,135 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+body{
+  margin:0
+}
+img{
+  position:relative;
+}
+.pnt{
+  position: absolute;
+  color:red;
+  font-family:sans-serif;
+}
+.current{
+  font-family:monospace
+}
+.d1{
+  padding:20px
+}
+</style>
+</head>
+<body>
+<div class="img">
+<img src="http://pbs.twimg.com/media/B0vhFEbCIAA1TfG.png" class="image"/>
+</div>
+<input id="c1" type="color" value="#999999"/>
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Canyoudecodeme : ">
+<p class="current"></p>
+<div class="d1"></div>
+<script id="jsbin-javascript">
+function cutHex(h) {
+  return (h.charAt(0)=="#") ? h.substring(1,7):h;
+}
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+function hexToB(h) {
+  return parseInt((cutHex(h)).substring(4,6),16);
+}
+var img = $('.img');
+function mark(cnt){
+  var cntvar = Math.floor( cnt /44);
+  var tp = 52 + (27.5 * cntvar);
+  var lft = 13 + ( ( cnt * 13 ) - ( ( 44 * 13 ) * cntvar ) );
+  img.append('<div class="pnt" style="top: '+tp+'px; left: '+lft+'px">x</div>');
+}
 
-    <title>Canyoudecodeme</title>
-  </head>
+var d1 = $('.d1');
+var curr = $('.current');
+var count = 0;
 
-  <body>
+$('#c1').on('input', function(e) {
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/getsetbro/canyoudecodeme">View on GitHub</a>
+  var a = $(this).val();
+  var b = hexToB(a);
+  var c = Math.floor( b / 2 );
+  var d = String.fromCharCode(c);
+  curr.html('hex: '+a+'<br>B value: '+b+'<br>charCode (B value div by 2): '+c+'<br>Letter: '+d);
+  d1.append('<span>' + d + '</span>');
+  mark(count);
+  count++;
+});
+</script>
 
-          <h1 id="project_title">Canyoudecodeme</h1>
-          <h2 id="project_tagline"></h2>
+<script id="jsbin-source-html" type="text/html"><!DOCTYPE html>
+<html>
+<head>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"><\/script>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+</head>
+<body>
+<div class="img">
+<img src="//pbs.twimg.com/media/B0vhFEbCIAA1TfG.png" class="image"/>
+</div>
+<input id="c1" type="color" value="#999999"/>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/getsetbro/canyoudecodeme/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/getsetbro/canyoudecodeme/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+<p class="current"></p>
+<div class="d1"></div>
+</body>
+</html></script>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>.</p>
-      </section>
-    </div>
+<script id="jsbin-source-css" type="text/css">body{
+  margin:0
+}
+img{
+  position:relative;
+}
+.pnt{
+  position: absolute;
+  color:red;
+  font-family:sans-serif;
+}
+.current{
+  font-family:monospace
+}
+.d1{
+  padding:20px
+}</script>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Canyoudecodeme maintained by <a href="https://github.com/getsetbro">getsetbro</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+<script id="jsbin-source-javascript" type="text/javascript">function cutHex(h) {
+  return (h.charAt(0)=="#") ? h.substring(1,7):h;
+}
 
-    
+function hexToB(h) {
+  return parseInt((cutHex(h)).substring(4,6),16);
+}
+var img = $('.img');
+function mark(cnt){
+  var cntvar = Math.floor( cnt /44);
+  var tp = 52 + (27.5 * cntvar);
+  var lft = 13 + ( ( cnt * 13 ) - ( ( 44 * 13 ) * cntvar ) );
+  img.append('<div class="pnt" style="top: '+tp+'px; left: '+lft+'px">x</div>');
+}
 
-  </body>
+var d1 = $('.d1');
+var curr = $('.current');
+var count = 0;
+
+$('#c1').on('input', function(e) {
+
+  var a = $(this).val();
+  var b = hexToB(a);
+  var c = Math.floor( b / 2 );
+  var d = String.fromCharCode(c);
+  curr.html('hex: '+a+'<br>B value: '+b+'<br>charCode (B value div by 2): '+c+'<br>Letter: '+d);
+  d1.append('<span>' + d + '</span>');
+  mark(count);
+  count++;
+});
+</script></body>
 </html>
