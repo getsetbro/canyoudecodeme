@@ -1,135 +1,75 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
-<style id="jsbin-css">
-body{
-  margin:0
-}
-img{
-  position:relative;
-}
-.pnt{
-  position: absolute;
-  color:red;
-  font-family:sans-serif;
-}
-.current{
-  font-family:monospace
-}
-.d1{
-  padding:20px
-}
-</style>
+    <meta charset="utf-8">
+    <title>decode</title>
+    <style>
+    body {
+        margin: 0
+    }
+    img {
+        position: relative;
+    }
+    .pnt {
+        position: absolute;
+        color: red;
+        font-family: sans-serif;
+    }
+    #c1{
+      margin-left: 10px;
+    }
+    .current {
+        font-family: monospace;
+        padding: 5px 10px;
+    }
+    .d1 {
+        padding: 5px 10px;
+    }
+    </style>
 </head>
+
 <body>
-<div class="img">
-<img src="http://pbs.twimg.com/media/B0vhFEbCIAA1TfG.png" class="image"/>
-</div>
-<input id="c1" type="color" value="#999999"/>
+    <div class="img">
+        <img src="//pbs.twimg.com/media/B0vhFEbCIAA1TfG.png" class="image" />
+    </div>
+    <input id="c1" type="color" value="#999999" />
+    <p class="current"></p>
+    <div class="d1"></div>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script>
+    function cutHex(h) {
+        return (h.charAt(0) == "#") ? h.substring(1, 7) : h;
+    }
 
-<p class="current"></p>
-<div class="d1"></div>
-<script id="jsbin-javascript">
-function cutHex(h) {
-  return (h.charAt(0)=="#") ? h.substring(1,7):h;
-}
+    function hexToB(h) {
+        return parseInt((cutHex(h)).substring(4, 6), 16);
+    }
+    var img = $('.img');
 
-function hexToB(h) {
-  return parseInt((cutHex(h)).substring(4,6),16);
-}
-var img = $('.img');
-function mark(cnt){
-  var cntvar = Math.floor( cnt /44);
-  var tp = 52 + (27.5 * cntvar);
-  var lft = 13 + ( ( cnt * 13 ) - ( ( 44 * 13 ) * cntvar ) );
-  img.append('<div class="pnt" style="top: '+tp+'px; left: '+lft+'px">x</div>');
-}
+    function mark(cnt) {
+        var cntvar = Math.floor(cnt / 44);
+        var tp = 52 + (27.5 * cntvar);
+        var lft = 13 + ((cnt * 13) - ((44 * 13) * cntvar));
+        img.append('<div class="pnt" style="top: ' + tp + 'px; left: ' + lft + 'px">x</div>');
+    }
 
-var d1 = $('.d1');
-var curr = $('.current');
-var count = 0;
+    var d1 = $('.d1');
+    var curr = $('.current');
+    var count = 0;
 
-$('#c1').on('input', function(e) {
+    $('#c1').on('input', function(e) {
 
-  var a = $(this).val();
-  var b = hexToB(a);
-  var c = Math.floor( b / 2 );
-  var d = String.fromCharCode(c);
-  curr.html('hex: '+a+'<br>B value: '+b+'<br>charCode (B value div by 2): '+c+'<br>Letter: '+d);
-  d1.append('<span>' + d + '</span>');
-  mark(count);
-  count++;
-});
-</script>
-
-<script id="jsbin-source-html" type="text/html"><!DOCTYPE html>
-<html>
-<head>
-<script src="//code.jquery.com/jquery-2.1.1.min.js"><\/script>
-  <meta charset="utf-8">
-  <title>JS Bin</title>
-</head>
-<body>
-<div class="img">
-<img src="//pbs.twimg.com/media/B0vhFEbCIAA1TfG.png" class="image"/>
-</div>
-<input id="c1" type="color" value="#999999"/>
-
-<p class="current"></p>
-<div class="d1"></div>
+        var a = $(this).val();
+        var b = hexToB(a);
+        var c = Math.floor(b / 2);
+        var d = String.fromCharCode(c);
+        curr.html('hex: ' + a + '<br>B value: ' + b + '<br>charCode (B value div by 2): ' + c + '<br>Letter: ' + d);
+        d1.append('<span>' + d + '</span>');
+        mark(count);
+        count++;
+    });
+    </script>
 </body>
-</html></script>
 
-<script id="jsbin-source-css" type="text/css">body{
-  margin:0
-}
-img{
-  position:relative;
-}
-.pnt{
-  position: absolute;
-  color:red;
-  font-family:sans-serif;
-}
-.current{
-  font-family:monospace
-}
-.d1{
-  padding:20px
-}</script>
-
-<script id="jsbin-source-javascript" type="text/javascript">function cutHex(h) {
-  return (h.charAt(0)=="#") ? h.substring(1,7):h;
-}
-
-function hexToB(h) {
-  return parseInt((cutHex(h)).substring(4,6),16);
-}
-var img = $('.img');
-function mark(cnt){
-  var cntvar = Math.floor( cnt /44);
-  var tp = 52 + (27.5 * cntvar);
-  var lft = 13 + ( ( cnt * 13 ) - ( ( 44 * 13 ) * cntvar ) );
-  img.append('<div class="pnt" style="top: '+tp+'px; left: '+lft+'px">x</div>');
-}
-
-var d1 = $('.d1');
-var curr = $('.current');
-var count = 0;
-
-$('#c1').on('input', function(e) {
-
-  var a = $(this).val();
-  var b = hexToB(a);
-  var c = Math.floor( b / 2 );
-  var d = String.fromCharCode(c);
-  curr.html('hex: '+a+'<br>B value: '+b+'<br>charCode (B value div by 2): '+c+'<br>Letter: '+d);
-  d1.append('<span>' + d + '</span>');
-  mark(count);
-  count++;
-});
-</script></body>
 </html>
